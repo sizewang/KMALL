@@ -1,0 +1,32 @@
+/*
+* @Author: TomChen
+* @Date:   2019-08-09 15:59:28
+* @Last Modified by:   TomChen
+* @Last Modified time: 2019-08-09 16:30:57
+*/
+*{
+    margin: 0;
+    padding: 0;
+}
+.ant-table-content{
+    min-height: 600px;
+}
+.ant-upload-picture-card-wrapper{
+    display: block !important;
+}
+.simditor .simditor-body{
+    overflow: hidden !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
