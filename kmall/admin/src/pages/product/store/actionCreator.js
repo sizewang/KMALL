@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-08-12 15:11:47
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-08-19 17:46:11
+* @Last Modified time: 2019-08-21 10:33:54
 */
 import api from 'api'
 import { message } from 'antd'
@@ -70,8 +70,11 @@ export const getSaveAction = (err,values)=>{
         if(hasErr){
             return
         }
-
-        api.addProducts({
+        let request = api.addProducts
+        if(values.id){
+            request = api.updateProducts
+        }
+        request({
             ...values,
             mainImage,
             images,
@@ -79,7 +82,7 @@ export const getSaveAction = (err,values)=>{
         })
         .then(result=>{
             if(result.code == 0){
-                message.success('添加商品成功',()=>{
+                message.success(result.message,()=>{
                     window.location.href = "/product"
                 })
             }else{
@@ -129,17 +132,19 @@ export const getPageAction = (page)=>{
         })                 
     }
 }
-export const getUpdateNameAction = (id,newName)=>{
+
+
+export const getUpdateIsShowAction = (id,newIsShow)=>{
     return (dispatch,getState)=>{
-        const page = getState().get('category').get('current')
-        api.updateCategoriesName({
+        const page = getState().get('product').get('current')
+        api.updateProductsIsShow({
             id:id,
-            name:newName,
+            isShow:newIsShow,
             page:page
         })
         .then(result=>{
             if(result.code == 0){
-                message.success('更新分类名称成功')
+                message.success('更新显示隐藏成功')
                 dispatch(getSetPageAction(result.data))
             }else{
                 message.error(result.message)
@@ -150,17 +155,38 @@ export const getUpdateNameAction = (id,newName)=>{
         })               
     }
 }
-export const getUpdateMobileNameAction = (id,newMobileName)=>{
+export const getUpdateStatusAction = (id,newStatus)=>{
     return (dispatch,getState)=>{
-        const page = getState().get('category').get('current')
-        api.updateCategoriesMobileName({
+        const page = getState().get('product').get('current')
+        api.updateProductsStatus({
             id:id,
-            mobileName:newMobileName,
+            status:newStatus,
             page:page
         })
         .then(result=>{
             if(result.code == 0){
-                message.success('更新手机分类名称成功')
+                message.success('更新上架下架成功')
+                dispatch(getSetPageAction(result.data))
+            }else{
+                message.error(result.message)
+            }
+        })
+        .catch(err=>{
+            message.error('网络错误,请稍后再试')
+        })               
+    }
+}
+export const getUpdateIsHotAction = (id,newIsHot)=>{
+    return (dispatch,getState)=>{
+        const page = getState().get('product').get('current')
+        api.updateProductsIsHot({
+            id:id,
+            isHot:newIsHot,
+            page:page
+        })
+        .then(result=>{
+            if(result.code == 0){
+                message.success('更新是否成功')
                 dispatch(getSetPageAction(result.data))
             }else{
                 message.error(result.message)
@@ -173,8 +199,8 @@ export const getUpdateMobileNameAction = (id,newMobileName)=>{
 }
 export const getUpdateOrderAction = (id,newOrder)=>{
     return (dispatch,getState)=>{
-        const page = getState().get('category').get('current')
-        api.updateCategoriesOrder({
+        const page = getState().get('product').get('current')
+        api.updateProductsOrder({
             id:id,
             order:newOrder,
             page:page
@@ -192,25 +218,26 @@ export const getUpdateOrderAction = (id,newOrder)=>{
         })               
     }
 }
-export const getUpdateUpdateIsShowAction = (id,newIsShow)=>{
+
+const setProductDetailAction = (payload)=>({
+    type:types.SET_PRODUCT_DETAIL,
+    payload
+})
+
+export const getProductDetailAction = (productId)=>{
     return (dispatch,getState)=>{
-        const page = getState().get('category').get('current')
-        api.updateCategoriesIsShow({
-            id:id,
-            isShow:newIsShow,
-            page:page
+        api.getProductDetail({
+            id:productId
         })
         .then(result=>{
             if(result.code == 0){
-                message.success('更新显示隐藏成功')
-                dispatch(getSetPageAction(result.data))
-            }else{
-                message.error(result.message)
+                dispatch(setProductDetailAction(result.data))
             }
+            
         })
         .catch(err=>{
             message.error('网络错误,请稍后再试')
-        })               
+        })              
     }
 }
 

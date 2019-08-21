@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-08-12 10:29:05
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-08-18 11:19:23
+* @Last Modified time: 2019-08-21 10:45:52
 */
 
 import * as types  from './actionTypes.js'
@@ -24,7 +24,13 @@ const defaultState = fromJS({
     mainImageHelp:'', 
     imagesValidateStatus:'',    
     imagesHelp:'',
-    
+
+    category:'',
+    name:'',
+    description:'',
+    price:'',
+    stock:'',
+    detail:''         
 })
 
 export default (state=defaultState,action)=>{
@@ -47,7 +53,7 @@ export default (state=defaultState,action)=>{
     }
     if(action.type == types.SET_MAIN_IMAGE){
         return state.merge({
-            'mainImage':action.payload,
+            mainImage:action.payload,
             mainImageValidateStatus:'',    
             mainImageHelp:'',              
         })
@@ -72,6 +78,19 @@ export default (state=defaultState,action)=>{
         return state.merge({
             imagesValidateStatus:'error',    
             imagesHelp:'请上传商品图片',             
+        })
+    }
+    if(action.type == types.SET_PRODUCT_DETAIL){
+        return state.merge({
+            category:action.payload.category._id,
+            categoryName:action.payload.category.name,
+            name:action.payload.name,
+            description:action.payload.description,
+            price:action.payload.price,
+            stock:action.payload.stock,
+            detail:action.payload.detail,
+            mainImage:action.payload.mainImage, 
+            images:action.payload.images, 
         })
     }         
     return state

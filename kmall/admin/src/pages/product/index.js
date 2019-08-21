@@ -2,7 +2,7 @@
  * @Author: TomChen
  * @Date:   2019-08-09 15:14:36
  * @Last Modified by:   TomChen
- * @Last Modified time: 2019-08-19 09:07:04
+ * @Last Modified time: 2019-08-21 15:34:47
  */
 import React, { Component } from 'react'
 import { 
@@ -10,6 +10,7 @@ import {
     Switch,
 } from "react-router-dom"
 import ProductSave from './save.js'
+import ProductDetail from './detail.js'
 import ProductList from './list.js'
 
 
@@ -22,7 +23,8 @@ class Product extends Component {
     render() {
         return (
            <Switch>
-                <Route path="/product/save" component={ProductSave} />
+                <Route path="/product/save/:productId?" component={ProductSave} />
+                <Route path="/product/detail/:productId?" component={ProductDetail} />
                 <Route path="/product/" component={ProductList} />
            </Switch> 
         )
