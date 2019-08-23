@@ -4,5 +4,5 @@
 * @Last Modified by:   TomChen
 * @Last Modified time: 2019-08-21 17:53:49
 */
+require('node_modules/font-awesome/css/font-awesome.min.css')
 require('./index.css')
-console.log('common index.js...')

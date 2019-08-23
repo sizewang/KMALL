@@ -4,5 +4,5 @@
 * @Last Modified by:   TomChen
 * @Last Modified time: 2019-08-21 17:54:13
 */
+require('pages/common/footer')
 require('./index.css')
-console.log('index index.js...')
