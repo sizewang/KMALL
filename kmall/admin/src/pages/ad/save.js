@@ -15,7 +15,7 @@ import { connect } from 'react-redux'
 import { actionCreator } from './store'
 
 import { 
-	UPLOAD_AD_IMAGE
+    UPLOAD_AD_IMAGE
 } from 'api/config.js'
 
 import Layout from 'common/layout'
@@ -27,25 +27,25 @@ class ProductSave extends Component {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
-        	adId:this.props.match.params.adId
+            adId:this.props.match.params.adId
         }
     }
     componentDidMount(){
-    	if(this.state.adId){
-    		this.props.handleAdDetail(this.state.adId)
-    	}
+        if(this.state.adId){
+            this.props.handleAdDetail(this.state.adId)
+        }
     }
 
     handleSubmit(e) {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
-        	values.id = this.state.adId;
-        	this.props.handleSave(err,values)
+            values.id = this.state.adId;
+            this.props.handleSave(err,values)
         });
-    }    	
-	render(){
-		const { getFieldDecorator } = this.props.form;
-		const { 
+    }       
+    render(){
+        const { getFieldDecorator } = this.props.form;
+        const { 
             imageValidateStatus,
             imageHelp,
             handleImage,                       
@@ -56,7 +56,7 @@ class ProductSave extends Component {
             order,
             isShow,
             handleDetail,
-		} = this.props;
+        } = this.props;
         const imageFileList = []
         if(image){
             imageFileList.push({
@@ -67,9 +67,9 @@ class ProductSave extends Component {
                     url:image
                 }                  
             })
-        }		
-		return(
-			<Layout>
+        }       
+        return(
+            <Layout>
                  <Breadcrumb style={{ margin: '16px 0' }}>
                   <Breadcrumb.Item>首页</Breadcrumb.Item>
                   <Breadcrumb.Item>广告管理</Breadcrumb.Item>
@@ -78,35 +78,35 @@ class ProductSave extends Component {
                         this.state.adId ? "编辑广告" : "添加广告"
                     }
                     </Breadcrumb.Item>
-				</Breadcrumb>			
-				<div className="content">
+                </Breadcrumb>           
+                <div className="content">
                     <Form labelCol={{ span: 5 }} wrapperCol={{ span: 12 }} >
-			        <Form.Item
-			          label="广告名称"
-			        >
-			          {getFieldDecorator('name', {
-			            rules: [
-			            {
-			              required: true, message: '请输入广告名称!',
-			            }],
-			            initialValue:name
-			          })(
-			            <Input placeholder="广告名称" />
-			          )}
-			        </Form.Item>
-			        <Form.Item
-			          label="广告地址"
-			        >
-			          {getFieldDecorator('link', {
-			            rules: [
-			            {
-			              required: true, message: '请输入广告地址!',
-			            }],
-			            initialValue:link
-			          })(
-			            <Input placeholder="广告地址" />
-			          )}
-			        </Form.Item>                    
+                    <Form.Item
+                      label="广告名称"
+                    >
+                      {getFieldDecorator('name', {
+                        rules: [
+                        {
+                          required: true, message: '请输入广告名称!',
+                        }],
+                        initialValue:name
+                      })(
+                        <Input placeholder="广告名称" />
+                      )}
+                    </Form.Item>
+                    <Form.Item
+                      label="广告地址"
+                    >
+                      {getFieldDecorator('link', {
+                        rules: [
+                        {
+                          required: true, message: '请输入广告地址!',
+                        }],
+                        initialValue:link
+                      })(
+                        <Input placeholder="广告地址" />
+                      )}
+                    </Form.Item>                    
                     <Form.Item
                       label="广告位置"
                     >
@@ -121,7 +121,7 @@ class ProductSave extends Component {
                             <Option key="1" value="1">首页轮播图</Option>
                         </Select>
                       )}
-                    </Form.Item> 			        
+                    </Form.Item>                    
                     <Form.Item
                       label="广告图片"
                       required={true}
@@ -136,7 +136,7 @@ class ProductSave extends Component {
                                 handleImage(filelist)
                             }}                            
                          />
-                    </Form.Item>                    			        			        			        			        			        			        
+                    </Form.Item>                                                                                                                                            
                     <Form.Item wrapperCol={{ span: 12, offset: 5 }}>
                       <Button 
                         type="primary"
@@ -144,39 +144,39 @@ class ProductSave extends Component {
                       >
                         提交
                       </Button>
-                    </Form.Item>			        			        					
-				</Form>
+                    </Form.Item>                                                            
+                </Form>
                 </div>
-			</Layout>
-		)
-	}
+            </Layout>
+        )
+    }
 }
 const WrappedProductSave = Form.create()(ProductSave);
 
 const mapStateToProps = (state)=>{
-	return {
-		imageValidateStatus:state.get('ad').get('imageValidateStatus'),
-		imageHelp:state.get('ad').get('imageHelp'),
-		image:state.get('ad').get('image'),
-		name:state.get('ad').get('name'),
+    return {
+        imageValidateStatus:state.get('ad').get('imageValidateStatus'),
+        imageHelp:state.get('ad').get('imageHelp'),
+        image:state.get('ad').get('image'),
+        name:state.get('ad').get('name'),
         link:state.get('ad').get('link'),
         position:state.get('ad').get('position'),
         order:state.get('ad').get('order'),
         isShow:state.get('ad').get('isShow')
-	}
+    }
 }
 const mapDispatchToProps = (dispatch)=>{
-	return{
-		handleSave:(err,values)=>{
-			dispatch(actionCreator.getSaveAction(err,values));
-		},
+    return{
+        handleSave:(err,values)=>{
+            dispatch(actionCreator.getSaveAction(err,values));
+        },
         handleImage:(fileList)=>{
             dispatch(actionCreator.getSetImageAction(fileList));
         },        
-		handleAdDetail:(productId)=>{
-			dispatch(actionCreator.getAdDetailAction(productId));
-		}				
-	}
+        handleAdDetail:(productId)=>{
+            dispatch(actionCreator.getAdDetailAction(productId));
+        }               
+    }
 }
 
 

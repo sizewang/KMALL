@@ -13,6 +13,8 @@ var API_CONFIG = {
     getUserinfo:                 ['/sessions/users','get'],
     updateUsers:                 ['/users','put'],
     getHomeCategories:           ['/categories/homeCategories','get'],
+    getPositionAds:              ['/ads/positionAds','get'],
+    getFloors:                   ['/floors','get'],
 }
 
 module.exports = {

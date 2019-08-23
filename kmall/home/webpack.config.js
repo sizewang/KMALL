@@ -114,7 +114,7 @@ module.exports = {
         contentBase: './dist',//内容的目录
         port:3002,//指定服务端口
         proxy: [{
-            context: ['/sessions','/users','/categories'],
+            context: ['/sessions','/users','/categories','/ads','/floors'],
             target: 'http://127.0.0.1:3000'
         }]
     },                
