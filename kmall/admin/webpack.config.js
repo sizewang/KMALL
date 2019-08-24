@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-08-08 16:30:19
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-08-11 17:52:31
+* @Last Modified time: 2019-08-16 10:17:32
 */
 
 const path = require('path')
@@ -34,12 +34,12 @@ module.exports = {
     },
     resolve:{
         alias:{
-            pages:path.resolve(__dirname,'./src/pages'), 
+            pages:path.resolve(__dirname,'./src/pages'),
             util:path.resolve(__dirname,'./src/util'),
             common:path.resolve(__dirname,'./src/common'),
             api:path.resolve(__dirname,'./src/api'),
         }
-    },
+    },    
     module: {
         rules: [
         //处理css文件
@@ -52,7 +52,7 @@ module.exports = {
                 ]
             },
         */
-            {
+          {
             test: /\.css$/,
             use: [
               {
@@ -62,7 +62,7 @@ module.exports = {
               },
               "css-loader"
             ]
-          },
+          },       
         //处理图片
             {
                 test: /\.(png|jpg|gif)$/i,
@@ -86,9 +86,9 @@ module.exports = {
                         presets: ['env','es2015','react','stage-3'],
                         plugins: [["import", { "libraryName": "antd", "libraryDirectory": "es", "style": true }] ]
                     },
-                }               
-            }, 
-                        {
+                }
+            },
+            {
                 test: /\.less$/,
                 use: [{
                     loader: 'style-loader',
@@ -105,7 +105,7 @@ module.exports = {
                         javascriptEnabled: true,
                     },
                 }],
-            }
+            }            
         ]
     },
     plugins:[
@@ -124,12 +124,3 @@ module.exports = {
         historyApiFallback:true//让h5路由不向后端发送请求
     },                
 }
-
-
-
-
-
-
-
-
-
