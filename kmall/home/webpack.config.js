@@ -27,6 +27,9 @@ module.exports = {
         'common'                  :'./src/pages/common/index.js',
         'index'                   :'./src/pages/index/index.js',
         'list'                    :'./src/pages/list/index.js',
+        'detail'                  :'./src/pages/detail/index.js',
+        'cart'                    :'./src/pages/cart/index.js',
+        'order-confirm'           :'./src/pages/order-confirm/index.js',
         'user-login'              :'./src/pages/user-login/index.js',
         'user-register'           :'./src/pages/user-register/index.js',
         'result'                  :'./src/pages/result/index.js',
@@ -100,7 +103,10 @@ module.exports = {
     plugins:[
         new CleanWebpackPlugin(),
         new htmlWebpackPlugin(getHtmlConfig('index','首页')),
-        new htmlWebpackPlugin(getHtmlConfig('list','列表页')),        
+        new htmlWebpackPlugin(getHtmlConfig('list','列表页')), 
+        new htmlWebpackPlugin(getHtmlConfig('detail','商品详情页')),
+        new htmlWebpackPlugin(getHtmlConfig('cart','购物车')),
+        new htmlWebpackPlugin(getHtmlConfig('order-confirm','订单确认')),       
         new htmlWebpackPlugin(getHtmlConfig('user-login','用户登录')),
         new htmlWebpackPlugin(getHtmlConfig('user-register','用户注册')),
         new htmlWebpackPlugin(getHtmlConfig('result','结果提示页')),
@@ -114,8 +120,18 @@ module.exports = {
         contentBase: './dist',//内容的目录
         port:3002,//指定服务端口
         proxy: [{
-          context: ['/sessions','/users','/categories','/ads','/floors'],
-          target: 'http://127.0.0.1:3000'
+          context: [
+              '/sessions',
+              '/users',
+              '/categories',
+              '/ads',
+              '/floors',
+              '/products',
+              '/carts',
+              '/orders',
+              '/shippings'
+          ],
+          target: 'http://127.0.0.1:3000',
         }]
     },                
 }
