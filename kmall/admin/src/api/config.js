@@ -36,7 +36,6 @@ export const API_CONFIG = {
     updateAds:                  ["/ads","put"],
     updateAdsOrder:             ["/ads/order","put"],
     updateAdsIsShow:            ["/ads/isShow","put"],
-
 }
 
 
